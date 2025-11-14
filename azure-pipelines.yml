@@ -88,22 +88,6 @@ stages:
             codeCoverageTool: 'Cobertura'
             summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
 
-        # Instalar EF Core Tools (necessário para rodar migrations)
-        - task: DotNetCoreCLI@2
-          displayName: 'Install EF Core Tools'
-          inputs:
-            command: 'custom'
-            custom: 'tool'
-            arguments: 'install --global dotnet-ef --version 9.0.0'
-
-        # Aplicar EF Core Migrations
-        - task: DotNetCoreCLI@2
-          displayName: 'Apply EF Core Migrations'
-          inputs:
-            command: 'custom'
-            custom: 'ef'
-            arguments: 'database update --project $(projectPath) --connection "Host=$(PG_HOST);Database=$(PG_DB);Username=$(PG_USER);Password=$(PG_PASS);SSL Mode=Require;Trust Server Certificate=true"'
-
         # Publicar aplicação
         - task: DotNetCoreCLI@2
           displayName: 'Publish Application'
@@ -164,11 +148,10 @@ stages:
                 appSettings: |
                   [
                     {"name":"ASPNETCORE_ENVIRONMENT","value":"Production","slotSetting":false},
-                    {"name":"ConnectionStrings__PostgreConnection","value":"Host=$(PG_HOST);Database=$(PG_DB);Username=$(PG_USER);Password=$(PG_PASS);SSL Mode=Require;Trust Server Certificate=true","slotSetting":false},
+                    {"name":"PostgreConnection","value":"Host=$(PG_HOST);Database=$(PG_DB);Username=$(PG_USER);Password=$(PG_PASS);SSL Mode=Require;Trust Server Certificate=true","slotSetting":false},
                     {"name":"JwtSettings__Secret","value":"$(JWT_SECRET)","slotSetting":false},
                     {"name":"JwtSettings__Issuer","value":"SynapseAPI","slotSetting":false},
                     {"name":"JwtSettings__Audience","value":"SynapseUsers","slotSetting":false},
                     {"name":"JwtSettings__ExpirationMinutes","value":"60","slotSetting":false},
                     {"name":"WEBSITES_PORT","value":"8080","slotSetting":false}
                   ]
-
