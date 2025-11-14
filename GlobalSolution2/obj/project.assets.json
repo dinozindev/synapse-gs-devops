@@ -69,6 +69,23 @@
           }
         }
       },
+      "AspNetCore.HealthChecks.NpgSql/9.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Diagnostics.HealthChecks": "8.0.11",
+          "Npgsql": "8.0.3"
+        },
+        "compile": {
+          "lib/net8.0/HealthChecks.NpgSql.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/HealthChecks.NpgSql.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "AspNetCore.HealthChecks.Oracle/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -3518,6 +3535,23 @@
         "icon.png",
         "lib/net7.0/Asp.Versioning.Mvc.ApiExplorer.dll",
         "lib/net7.0/Asp.Versioning.Mvc.ApiExplorer.xml"
+      ]
+    },
+    "AspNetCore.HealthChecks.NpgSql/9.0.0": {
+      "sha512": "npc58/AD5zuVxERdhCl2Kb7WnL37mwX42SJcXIwvmEig0/dugOLg3SIwtfvvh3TnvTwR/sk5LYNkkPaBdks61A==",
+      "type": "package",
+      "path": "aspnetcore.healthchecks.npgsql/9.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "aspnetcore.healthchecks.npgsql.9.0.0.nupkg.sha512",
+        "aspnetcore.healthchecks.npgsql.nuspec",
+        "icon.png",
+        "lib/net8.0/HealthChecks.NpgSql.dll",
+        "lib/net8.0/HealthChecks.NpgSql.xml",
+        "lib/netstandard2.0/HealthChecks.NpgSql.dll",
+        "lib/netstandard2.0/HealthChecks.NpgSql.xml"
       ]
     },
     "AspNetCore.HealthChecks.Oracle/9.0.0": {
@@ -10350,6 +10384,7 @@
     "net9.0": [
       "Asp.Versioning.Http >= 7.1.0",
       "Asp.Versioning.Mvc.ApiExplorer >= 7.1.0",
+      "AspNetCore.HealthChecks.NpgSql >= 9.0.0",
       "AspNetCore.HealthChecks.Oracle >= 9.0.0",
       "AspNetCore.HealthChecks.UI.Client >= 9.0.0",
       "BCrypt.Net-Next >= 4.0.3",
@@ -10428,6 +10463,10 @@
           "Asp.Versioning.Mvc.ApiExplorer": {
             "target": "Package",
             "version": "[7.1.0, )"
+          },
+          "AspNetCore.HealthChecks.NpgSql": {
+            "target": "Package",
+            "version": "[9.0.0, )"
           },
           "AspNetCore.HealthChecks.Oracle": {
             "target": "Package",

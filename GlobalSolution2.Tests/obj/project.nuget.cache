@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "EX9/Zs4Kx3U=",
+  "dgSpecHash": "A52gQKUkSWM=",
   "success": true,
   "projectFilePath": "D:\\Aulas\\synapse-gs-devops\\GlobalSolution2.Tests\\GlobalSolution2.Tests.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\pugpl\\.nuget\\packages\\asp.versioning.http\\7.1.0\\asp.versioning.http.7.1.0.nupkg.sha512",
     "C:\\Users\\pugpl\\.nuget\\packages\\asp.versioning.mvc\\7.1.0\\asp.versioning.mvc.7.1.0.nupkg.sha512",
     "C:\\Users\\pugpl\\.nuget\\packages\\asp.versioning.mvc.apiexplorer\\7.1.0\\asp.versioning.mvc.apiexplorer.7.1.0.nupkg.sha512",
+    "C:\\Users\\pugpl\\.nuget\\packages\\aspnetcore.healthchecks.npgsql\\9.0.0\\aspnetcore.healthchecks.npgsql.9.0.0.nupkg.sha512",
     "C:\\Users\\pugpl\\.nuget\\packages\\aspnetcore.healthchecks.oracle\\9.0.0\\aspnetcore.healthchecks.oracle.9.0.0.nupkg.sha512",
     "C:\\Users\\pugpl\\.nuget\\packages\\aspnetcore.healthchecks.ui.client\\9.0.0\\aspnetcore.healthchecks.ui.client.9.0.0.nupkg.sha512",
     "C:\\Users\\pugpl\\.nuget\\packages\\aspnetcore.healthchecks.ui.core\\9.0.0\\aspnetcore.healthchecks.ui.core.9.0.0.nupkg.sha512",

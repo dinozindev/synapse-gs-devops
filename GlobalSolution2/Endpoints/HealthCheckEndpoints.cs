@@ -23,7 +23,7 @@ public static class HealthCheckEndpoints
         })
         .WithName("GetDatabaseHealthCheck")
         .WithSummary("Retorna o Health Check do banco de dados")
-        .WithDescription("Retorna o Health Check do banco de dados Oracle.")
+        .WithDescription("Retorna o Health Check do banco de dados PostgreSQL.")
         .WithTags("HealthCheck");
     }
 }
