@@ -28,7 +28,7 @@ namespace GlobalSolution2.Migrations
                 });
 
             migrationBuilder.Sql(@"
-            INSERT INTO competencia (nome_competencia, categoria_competencia, descricao_competencia) VALUES
+            INSERT INTO ""COMPETENCIA"" (""NOME_COMPETENCIA"", ""CATEGORIA_COMPETENCIA"", ""DESCRICAO_COMPETENCIA"") VALUES
             ('Python', 'Back-end', 'Linguagem versátil para desenvolvimento e ciência de dados'),
             ('JavaScript', 'Front-end', 'Linguagem essencial para desenvolvimento web'),
             ('React', 'Front-end', 'Biblioteca moderna para interfaces de usuário'),
@@ -72,7 +72,7 @@ namespace GlobalSolution2.Migrations
             migrationBuilder.Sql("ALTER TABLE \"USUARIO\" ADD CONSTRAINT CHK_NIVEL_EXPERIENCIA CHECK (\"NIVEL_EXPERIENCIA\" IN ('Nenhuma', 'Estagiário', 'Júnior', 'Sênior', 'Pleno'))");
 
             migrationBuilder.Sql(@"
-            INSERT INTO usuario (nome_usuario, senha_usuario, area_atual, area_interesse, objetivo_carreira, nivel_experiencia) VALUES
+            INSERT INTO ""USUARIO"" (""NOME_USUARIO"", ""SENHA_USUARIO"", ""AREA_ATUAL"", ""AREA_INTERESSE"", ""OBJETIVO_CARREIRA"", ""NIVEL_EXPERIENCIA"") VALUES
             ('maria.silva', 'senha123', 'Suporte Técnico', 'DevOps', 'Migrar para área de infraestrutura e automação', 'Júnior'),
             ('joao.santos', 'pass456', 'Analista de Sistemas', 'Data Science', 'Tornar-me cientista de dados especializado em IA', 'Pleno'),
             ('ana.costa', 'secure789', 'Designer Gráfico', 'UX/UI', 'Transição para design de experiência do usuário', 'Júnior'),
@@ -111,7 +111,7 @@ namespace GlobalSolution2.Migrations
                 });
             
             migrationBuilder.Sql(@"
-            INSERT INTO recomendacao (usuario_id_usuario, data_recomendacao, titulo_recomendacao, descricao_recomendacao, prompt_usado) VALUES
+            INSERT INTO ""RECOMENDACAO"" (""USUARIO_ID_USUARIO"", ""DATA_RECOMENDACAO"", ""TITULO_RECOMENDACAO"", ""DESCRICAO_RECOMENDACAO"", ""PROMPT_USADO"") VALUES
             -- Recomendações Profissionais (IDs 1-10)
             (1, CURRENT_DATE, 'Vaga Front-end Júnior', 'Oportunidade para desenvolvedor front-end iniciante', 'IA recomenda vagas baseadas em perfil'),
             (1, CURRENT_DATE, 'Curso de Back-end com Spring Boot', 'Aprofunde seus conhecimentos em APIs Java', 'IA recomenda curso baseado em interesse'),
@@ -165,7 +165,7 @@ namespace GlobalSolution2.Migrations
             migrationBuilder.Sql("ALTER TABLE \"REGISTRO_BEM_ESTAR\" ADD CONSTRAINT CHK_HUMOR_REGISTRO CHECK (\"HUMOR_REGISTRO\" IN ('Feliz', 'Triste', 'Estressado', 'Bravo', 'Calmo'))");
 
             migrationBuilder.Sql(@"
-            INSERT INTO registro_bem_estar (usuario_id_usuario, data_registro, humor_registro, horas_sono, horas_trabalho, nivel_energia, nivel_estresse, observacao_registro) VALUES
+            INSERT INTO ""REGISTRO_BEM_ESTAR"" (""USUARIO_ID_USUARIO"", ""DATA_REGISTRO"", ""HUMOR_REGISTRO"", ""HORAS_SONO"", ""HORAS_TRABALHO"", ""NIVEL_ENERGIA"", ""NIVEL_ESTRESSE"", ""OBSERVACAO_REGISTRO"") VALUES
             -- Maria Silva (ID 1)
             (1, CURRENT_DATE - INTERVAL '7 days', 'Estressado', 6, 10, 5, 8, 'Muita demanda no trabalho'),
             (1, CURRENT_DATE - INTERVAL '6 days', 'Calmo', 7, 8, 7, 5, 'Dia mais tranquilo'),
@@ -228,7 +228,7 @@ namespace GlobalSolution2.Migrations
                 });
             
              migrationBuilder.Sql(@"
-            INSERT INTO usuario_competencia (usuario_id_usuario, competencia_id_competencia) VALUES
+            INSERT INTO ""USUARIO_COMPETENCIA"" (""USUARIO_ID_USUARIO"", ""COMPETENCIA_ID_COMPETENCIA"") VALUES
             -- Maria Silva (ID 1)
             (1, 5),   -- Docker
             (1, 10),  -- Git
@@ -306,7 +306,7 @@ namespace GlobalSolution2.Migrations
             migrationBuilder.Sql("ALTER TABLE \"RECOMENDACAO_PROFISSIONAL\" ADD CONSTRAINT CHK_AREA_RECOMENDACAO CHECK (\"AREA_RECOMENDACAO\" IN ('Front-end', 'Back-end', 'DevOps', 'UX/UI', 'Data Science', 'Banco de Dados', 'Governança de TI', 'IA'))");
 
             migrationBuilder.Sql(@"
-            INSERT INTO recomendacao_profissional (id_recomendacao, categoria_recomendacao, area_recomendacao, fonte_recomendacao) VALUES
+            INSERT INTO ""RECOMENDACAO_PROFISSIONAL"" (""ID_RECOMENDACAO"", ""CATEGORIA_RECOMENDACAO"", ""AREA_RECOMENDACAO"", ""FONTE_RECOMENDACAO"") VALUES
             (1, 'Vaga', 'Front-end', 'LinkedIn'),
             (2, 'Curso', 'Back-end', 'Alura'),
             (3, 'Vaga', 'DevOps', 'Gupy'),
@@ -344,7 +344,7 @@ namespace GlobalSolution2.Migrations
             migrationBuilder.Sql("ALTER TABLE \"RECOMENDACAO_SAUDE\" ADD CONSTRAINT CHK_NIVEL_ALERTA CHECK (\"NIVEL_ALERTA\" IN ('Baixo', 'Moderado', 'Alto'))");
 
             migrationBuilder.Sql(@"
-            INSERT INTO recomendacao_saude (id_recomendacao, tipo_saude, nivel_alerta, mensagem_saude) VALUES
+            INSERT INTO ""RECOMENDACAO_SAUDE"" (""ID_RECOMENDACAO"", ""TIPO_SAUDE"", ""NIVEL_ALERTA"", ""MENSAGEM_SAUDE"") VALUES
             (11, 'Sono', 'Moderado', 'Estabeleça rotina de sono consistente'),
             (12, 'Produtividade', 'Baixo', 'Utilize a técnica Pomodoro para melhor desempenho'),
             (13, 'Saúde Mental', 'Moderado', 'Pratique meditação ou respiração profunda'),
