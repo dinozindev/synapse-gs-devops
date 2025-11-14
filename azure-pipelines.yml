@@ -2,9 +2,6 @@ trigger:
   branches:
     include:
       - main   # Apenas pushes na branch principal (merge de PR) disparam build
-  paths:
-    exclude:
-      - '*'    
 pr:
   branches:
     include:
