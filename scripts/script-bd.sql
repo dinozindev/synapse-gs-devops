@@ -1,9 +1,5 @@
 /*
-============================================================
 SCRIPT DE CRIAÇÃO DE BANCO - Synapse
-Banco: PostgreSQL
-Autor: Equipe Synapse
-============================================================
 */
 
 /* ============================================================
@@ -34,7 +30,7 @@ CREATE TABLE "USUARIO" (
 );
 
 /* ============================================================
-   TABELA: RECOMENDACAO (SUPERCLASSE)
+   TABELA: RECOMENDACAO 
    ============================================================ */
 CREATE TABLE "RECOMENDACAO" (
     "ID_RECOMENDACAO"        BIGSERIAL PRIMARY KEY,
@@ -48,7 +44,7 @@ CREATE TABLE "RECOMENDACAO" (
 );
 
 /* ============================================================
-   TABELA: RECOMENDACAO_PROFISSIONAL (SUBCLASSE)
+   TABELA: RECOMENDACAO_PROFISSIONAL
    ============================================================ */
 CREATE TABLE "RECOMENDACAO_PROFISSIONAL" (
     "ID_RECOMENDACAO"        BIGINT PRIMARY KEY,
@@ -69,7 +65,7 @@ CREATE TABLE "RECOMENDACAO_PROFISSIONAL" (
 );
 
 /* ============================================================
-   TABELA: RECOMENDACAO_SAUDE (SUBCLASSE)
+   TABELA: RECOMENDACAO_SAUDE 
    ============================================================ */
 CREATE TABLE "RECOMENDACAO_SAUDE" (
     "ID_RECOMENDACAO" BIGINT PRIMARY KEY,
@@ -107,7 +103,7 @@ CREATE TABLE "REGISTRO_BEM_ESTAR" (
 );
 
 /* ============================================================
-   TABELA: USUARIO_COMPETENCIA (N:N)
+   TABELA: USUARIO_COMPETENCIA
    ============================================================ */
 CREATE TABLE "USUARIO_COMPETENCIA" (
     "USUARIO_ID_USUARIO"         BIGINT NOT NULL,
