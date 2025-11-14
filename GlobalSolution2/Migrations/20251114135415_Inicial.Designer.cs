@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Oracle.EntityFrameworkCore.Metadata;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace GlobalSolution2.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251112172916_Inicial")]
+    [Migration("20251114135415_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -21,35 +21,35 @@ namespace GlobalSolution2.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("GlobalSolution2.Models.Competencia", b =>
                 {
                     b.Property<int>("CompetenciaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("integer")
                         .HasColumnName("ID_COMPETENCIA");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompetenciaId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CompetenciaId"));
 
                     b.Property<string>("CategoriaCompetencia")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("NVARCHAR2(50)")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("CATEGORIA_COMPETENCIA");
 
                     b.Property<string>("DescricaoCompetencia")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR2(255)")
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("DESCRICAO_COMPETENCIA");
 
                     b.Property<string>("NomeCompetencia")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("NVARCHAR2(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("NOME_COMPETENCIA");
 
                     b.HasKey("CompetenciaId");
@@ -61,35 +61,35 @@ namespace GlobalSolution2.Migrations
                 {
                     b.Property<int>("RecomendacaoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("integer")
                         .HasColumnName("ID_RECOMENDACAO");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecomendacaoId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RecomendacaoId"));
 
                     b.Property<DateTime>("DataRecomendacao")
-                        .HasColumnType("TIMESTAMP(7)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("DATA_RECOMENDACAO");
 
                     b.Property<string>("DescricaoRecomendacao")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("NVARCHAR2(1000)")
+                        .HasColumnType("character varying(1000)")
                         .HasColumnName("DESCRICAO_RECOMENDACAO");
 
                     b.Property<string>("PromptUsado")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("NVARCHAR2(1000)")
+                        .HasColumnType("character varying(1000)")
                         .HasColumnName("PROMPT_USADO");
 
                     b.Property<string>("TituloRecomendacao")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("NVARCHAR2(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("TITULO_RECOMENDACAO");
 
                     b.Property<int>("UsuarioId")
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("integer")
                         .HasColumnName("USUARIO_ID_USUARIO");
 
                     b.HasKey("RecomendacaoId");
@@ -105,48 +105,48 @@ namespace GlobalSolution2.Migrations
                 {
                     b.Property<int>("RegistroId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("integer")
                         .HasColumnName("ID_REGISTRO");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RegistroId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RegistroId"));
 
                     b.Property<DateTime>("DataRegistro")
-                        .HasColumnType("TIMESTAMP(7)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("DATA_REGISTRO");
 
                     b.Property<int>("HorasSono")
                         .HasPrecision(2)
-                        .HasColumnType("NUMBER(2,0)")
+                        .HasColumnType("integer")
                         .HasColumnName("HORAS_SONO");
 
                     b.Property<int>("HorasTrabalho")
                         .HasPrecision(2)
-                        .HasColumnType("NUMBER(2,0)")
+                        .HasColumnType("integer")
                         .HasColumnName("HORAS_TRABALHO");
 
                     b.Property<string>("HumorRegistro")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("NVARCHAR2(20)")
+                        .HasColumnType("character varying(20)")
                         .HasColumnName("HUMOR_REGISTRO");
 
                     b.Property<int>("NivelEnergia")
                         .HasPrecision(2)
-                        .HasColumnType("NUMBER(2,0)")
+                        .HasColumnType("integer")
                         .HasColumnName("NIVEL_ENERGIA");
 
                     b.Property<int>("NivelEstresse")
                         .HasPrecision(2)
-                        .HasColumnType("NUMBER(2,0)")
+                        .HasColumnType("integer")
                         .HasColumnName("NIVEL_ESTRESSE");
 
                     b.Property<string>("ObservacaoRegistro")
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR2(255)")
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("OBSERVACAO_REGISTRO");
 
                     b.Property<int>("UsuarioId")
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("integer")
                         .HasColumnName("USUARIO_ID_USUARIO");
 
                     b.HasKey("RegistroId");
@@ -160,45 +160,45 @@ namespace GlobalSolution2.Migrations
                 {
                     b.Property<int>("UsuarioId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("integer")
                         .HasColumnName("ID_USUARIO");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UsuarioId"));
 
                     b.Property<string>("AreaAtual")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("NVARCHAR2(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("AREA_ATUAL");
 
                     b.Property<string>("AreaInteresse")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("NVARCHAR2(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("AREA_INTERESSE");
 
                     b.Property<string>("NivelExperiencia")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("NVARCHAR2(50)")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("NIVEL_EXPERIENCIA");
 
                     b.Property<string>("NomeUsuario")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("NVARCHAR2(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("NOME_USUARIO");
 
                     b.Property<string>("ObjetivoCarreira")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR2(255)")
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("OBJETIVO_CARREIRA");
 
                     b.Property<string>("SenhaUsuario")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("NVARCHAR2(255)")
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("SENHA_USUARIO");
 
                     b.HasKey("UsuarioId");
@@ -212,12 +212,12 @@ namespace GlobalSolution2.Migrations
             modelBuilder.Entity("UsuarioCompetencia", b =>
                 {
                     b.Property<int>("UsuarioId")
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("integer")
                         .HasColumnName("USUARIO_ID_USUARIO")
                         .HasColumnOrder(0);
 
                     b.Property<int>("CompetenciaId")
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("integer")
                         .HasColumnName("COMPETENCIA_ID_COMPETENCIA")
                         .HasColumnOrder(1);
 
@@ -235,19 +235,19 @@ namespace GlobalSolution2.Migrations
                     b.Property<string>("AreaRecomendacao")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("NVARCHAR2(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("AREA_RECOMENDACAO");
 
                     b.Property<string>("CategoriaRecomendacao")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("NVARCHAR2(50)")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("CATEGORIA_RECOMENDACAO");
 
                     b.Property<string>("FonteRecomendacao")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("NVARCHAR2(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("FONTE_RECOMENDACAO");
 
                     b.ToTable("RECOMENDACAO_PROFISSIONAL", (string)null);
@@ -260,19 +260,19 @@ namespace GlobalSolution2.Migrations
                     b.Property<string>("MensagemSaude")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("NVARCHAR2(1000)")
+                        .HasColumnType("character varying(1000)")
                         .HasColumnName("MENSAGEM_SAUDE");
 
                     b.Property<string>("NivelAlerta")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("NVARCHAR2(50)")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("NIVEL_ALERTA");
 
                     b.Property<string>("TipoSaude")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("NVARCHAR2(50)")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("TIPO_SAUDE");
 
                     b.ToTable("RECOMENDACAO_SAUDE", (string)null);

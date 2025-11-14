@@ -111,6 +111,10 @@
               "target": "Package",
               "version": "[4.0.2, )"
             },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
             "OpenTelemetry.Exporter.Console": {
               "target": "Package",
               "version": "[1.14.0, )"

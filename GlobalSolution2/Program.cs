@@ -17,11 +17,6 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Swashbuckle.AspNetCore.Filters;
 
-// TODO
-// Documentação
-// Exemplos???
-// Vídeo
-
 [assembly: InternalsVisibleTo("GlobalSolution2.Tests")]
 
 // Carregando variáveis de ambiente do arquivo .env
@@ -110,13 +105,10 @@ builder.Services.AddApiVersioning(options =>
 
 
 // ConnectionString usando variável de ambiente com .env
-var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__OracleConnection");
-
-if (string.IsNullOrWhiteSpace(connectionString))
-    throw new InvalidOperationException("ConnectionString Oracle não configurada.");
+var connectionString = Environment.GetEnvironmentVariable("PostgreConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseOracle(connectionString));
+    options.UseNpgsql(connectionString));
 
 // HEALTH CHECKS
 builder.Services.AddHealthChecks()
@@ -237,6 +229,24 @@ app.MapRecomendacaoSaudeEndpoints(apiVersionSet);
 app.MapProcedureEndpoints(apiVersionSet);
 app.MapHealthCheckEndpoints();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        
+        context.Database.Migrate();
+        
+        app.Logger.LogInformation("Database migrations aplicadas com sucesso!");
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Erro ao aplicar migrations");
+        throw;
+    }
+}
+
 // SWAGGER UI
 if (app.Environment.IsDevelopment())
 {
@@ -249,6 +259,16 @@ if (app.Environment.IsDevelopment())
         options.DisplayRequestDuration();
     });
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Mottu Mottion API V1");
+        options.SwaggerEndpoint("/swagger/v2/swagger.json", "Mottu Mottion API V2");
+        options.RoutePrefix = "swagger";
+        options.DisplayRequestDuration();
+    });
+
 
 await app.RunAsync();
 
