@@ -24,9 +24,7 @@ variables:
 
 stages:
 
-# ==========================================================
 # STAGE 1: BUILD
-# ==========================================================
 - stage: Build
   displayName: "Build Stage"
   jobs:
@@ -105,9 +103,7 @@ stages:
             artifactName: 'webapp'
             publishLocation: 'Container'
 
-# ==========================================================
-# STAGE 2: DEPLOY
-# ==========================================================
+# STAGE 2: DEPLOY (RELEASE)
 - stage: Release
   displayName: "Deploy to Azure"
   dependsOn: Build
