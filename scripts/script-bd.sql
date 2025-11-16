@@ -1,5 +1,6 @@
 /*
 SCRIPT DE CRIAÇÃO DE BANCO - Synapse
+OBS.: A criação das tabelas foi feita pela Migration 20251114135415_Inicial.cs
 */
 
 /* ============================================================
