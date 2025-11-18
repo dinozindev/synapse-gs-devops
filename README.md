@@ -1,4 +1,4 @@
-# Synapse - API - Global Solution (DevOps) Teste
+# Synapse - API - Global Solution (DevOps)
 
 ## Integrantes
 
@@ -16,7 +16,7 @@ Em resumo, o Synapse combina orientação profissional e gestão de bem-estar em
 
 ## Diagrama da Arquitetura
 
-![App Screenshot](https://imgur.com/TqQJkHM.png)
+![App Screenshot](diagrama.png)
 
 ## Justificativa da Arquitetura
 
