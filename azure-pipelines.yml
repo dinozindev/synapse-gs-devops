@@ -1,12 +1,11 @@
 trigger:
   branches:
-    exclude:
-      - "*"
-
+    include:
+      - main   # Apenas pushes na branch principal (merge de PR) disparam build
 pr:
   branches:
     include:
-      - main  # Build só via PR
+      - main   
 
 variables:
   - group: SynapseSecrets  # contém: PG_HOST, PG_DB, PG_USER, PG_PASS, JWT_SECRET
@@ -25,9 +24,7 @@ variables:
 
 stages:
 
-# ==========================================================
 # STAGE 1: BUILD
-# ==========================================================
 - stage: Build
   displayName: "Build Stage"
   jobs:
@@ -68,8 +65,7 @@ stages:
           inputs:
             command: 'test'
             projects: '$(testProjectPath)'
-            arguments: '--configuration Release --no-build --logger trx --collect:"XPlat Code Coverage"'
-          continueOnError: false
+            arguments: '--configuration Release --logger "trx;LogFileName=test_results.trx"'
 
         # Publicar resultados de teste
         - task: PublishTestResults@2
@@ -81,7 +77,7 @@ stages:
             testRunTitle: 'Unit Tests - Synapse API'
             mergeTestResults: true
 
-        # Publicar cobertura (opcional)
+        # Publicar cobertura
         - task: PublishCodeCoverageResults@1
           displayName: 'Publish Code Coverage'
           condition: always()
@@ -89,7 +85,7 @@ stages:
             codeCoverageTool: 'Cobertura'
             summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
 
-        # Publish (gerar artefato)
+        # Publicar aplicação
         - task: DotNetCoreCLI@2
           displayName: 'Publish Application'
           inputs:
@@ -107,9 +103,7 @@ stages:
             artifactName: 'webapp'
             publishLocation: 'Container'
 
-# ==========================================================
-# STAGE 2: DEPLOY
-# ==========================================================
+# STAGE 2: DEPLOY (RELEASE)
 - stage: Release
   displayName: "Deploy to Azure"
   dependsOn: Build
@@ -149,29 +143,10 @@ stages:
                 appSettings: |
                   [
                     {"name":"ASPNETCORE_ENVIRONMENT","value":"Production","slotSetting":false},
-                    {"name":"ConnectionStrings__PostgreConnection","value":"Host=$(PG_HOST);Database=$(PG_DB);Username=$(PG_USER);Password=$(PG_PASS);SSL Mode=Require;Trust Server Certificate=true","slotSetting":false},
+                    {"name":"PostgreConnection","value":"Host=$(PG_HOST);Database=$(PG_DB);Username=$(PG_USER);Password=$(PG_PASS);SSL Mode=Require;Trust Server Certificate=true","slotSetting":false},
                     {"name":"JwtSettings__Secret","value":"$(JWT_SECRET)","slotSetting":false},
                     {"name":"JwtSettings__Issuer","value":"SynapseAPI","slotSetting":false},
                     {"name":"JwtSettings__Audience","value":"SynapseUsers","slotSetting":false},
                     {"name":"JwtSettings__ExpirationMinutes","value":"60","slotSetting":false},
                     {"name":"WEBSITES_PORT","value":"8080","slotSetting":false}
                   ]
-
-            # Install EF Core Tools
-            - task: DotNetCoreCLI@2
-              displayName: 'Install EF Core Tools'
-              inputs:
-                command: 'custom'
-                custom: 'tool'
-                arguments: 'install --global dotnet-ef --version 9.0.0'
-
-            # Apply EF Core Migrations
-            - task: DotNetCoreCLI@2
-              displayName: 'Apply EF Core Migrations'
-              inputs:
-                command: 'custom'
-                custom: 'ef'
-                arguments: 'database update --project $(Pipeline.Workspace)/webapp/GlobalSolution2/GlobalSolution2.csproj --connection "Host=$(PG_HOST);Database=$(PG_DB);Username=$(PG_USER);Password=$(PG_PASS);SSL Mode=Require;Trust Server Certificate=true"'
-              continueOnError: false
-
-

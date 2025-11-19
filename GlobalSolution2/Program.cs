@@ -112,13 +112,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // HEALTH CHECKS
 builder.Services.AddHealthChecks()
-    .AddOracle(
+    .AddNpgSql(
         connectionString: connectionString,
-        name: "oracle-database",
-        failureStatus: HealthStatus.Degraded,
-        tags: new[] { "db", "oracle", "sql" },
+        name: "postgres-database",
+        failureStatus: Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Degraded,
+        tags: new[] { "db", "postgres", "sql" },
         timeout: TimeSpan.FromSeconds(10)
     );
+
 
 // SERVICES
 builder.Services.AddScoped<JwtTokenService>();
@@ -128,7 +129,6 @@ builder.Services.AddScoped<CompetenciaService>();
 builder.Services.AddScoped<RegistroBemEstarService>();
 builder.Services.AddScoped<RecomendacaoProfissionalService>();
 builder.Services.AddScoped<RecomendacaoSaudeService>();
-builder.Services.AddScoped<ProcedureService>();
 
 // RATE LIMITER
 builder.Services.AddRateLimiter(options =>
@@ -226,7 +226,6 @@ app.MapCompetenciaEndpoints(apiVersionSet);
 app.MapRegistroBemEstarEndpoints(apiVersionSet);
 app.MapRecomendacaoProfissionalEndpoints(apiVersionSet);
 app.MapRecomendacaoSaudeEndpoints(apiVersionSet);
-app.MapProcedureEndpoints(apiVersionSet);
 app.MapHealthCheckEndpoints();
 
 using (var scope = app.Services.CreateScope())
@@ -263,8 +262,8 @@ if (app.Environment.IsDevelopment())
 app.UseSwagger();
 app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Mottu Mottion API V1");
-        options.SwaggerEndpoint("/swagger/v2/swagger.json", "Mottu Mottion API V2");
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Synapse API V1");
+        options.SwaggerEndpoint("/swagger/v2/swagger.json", "Synapse API V2");
         options.RoutePrefix = "swagger";
         options.DisplayRequestDuration();
     });
